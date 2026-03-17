@@ -1,47 +1,50 @@
-// Configuration for the plant API endpoint
+// API endpoint used to retrieve plant data
 const API_URL = "https://perenual.com/api/species-list?key=sk-demo&page=1";
 
 
-// Create a container where plant cards will be displayed
-const plantContainer = document.createElement("div");
-plantContainer.id = "plant-container";
+// Get plant container already in the HTML page
+const plantContainer = document.getElementById("plant-container");
 
 
-// Add the plant container to the main section of the page
-document.querySelector("main").appendChild(plantContainer);
-
-
-// Local storage key used to save the user's garden plan
+// LocalStorage key for saving the garden plan
 const STORAGE_KEY = "gardenPlan";
 
 
-// Retrieve the saved garden plan from localStorage
+// Get saved garden plan from localStorage
 function getGardenPlan() {
-  const data = localStorage.getItem(STORAGE_KEY);
-  return data ? JSON.parse(data) : [];
+  const storedPlan = localStorage.getItem(STORAGE_KEY);
+  return storedPlan ? JSON.parse(storedPlan) : [];
 }
 
 
-// Save the garden plan to localStorage
+// Save garden plan to localStorage
 function saveGardenPlan(plan) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(plan));
 }
 
 
-// Fetch plant data from the external plant API
+// Fetch plant data from the API
 async function fetchPlants() {
+
   try {
+
     const response = await fetch(API_URL);
+
     const data = await response.json();
+
     return data.data || [];
+
   } catch (error) {
-    console.error("Error fetching plant data:", error);
+
+    console.error("Plant API error:", error);
+
     return [];
   }
+
 }
 
 
-// Create an individual plant card element
+// Create a plant card element
 function createPlantCard(plant) {
 
   const card = document.createElement("div");
@@ -51,72 +54,98 @@ function createPlantCard(plant) {
   name.textContent = plant.common_name || "Unknown Plant";
 
   const scientific = document.createElement("p");
-  scientific.textContent = plant.scientific_name
-    ? plant.scientific_name.join(", ")
-    : "No scientific name available";
+
+  if (plant.scientific_name) {
+    scientific.textContent = plant.scientific_name.join(", ");
+  } else {
+    scientific.textContent = "Scientific name unavailable";
+  }
 
   const button = document.createElement("button");
   button.textContent = "Add to Garden";
 
-  button.addEventListener("click", () => addToGarden(plant));
+  button.addEventListener("click", () => {
+    addToGarden(plant);
+  });
 
   card.appendChild(name);
   card.appendChild(scientific);
   card.appendChild(button);
 
   return card;
+
 }
 
 
-// Render plant cards to the page
+// Render plants to the page
 function renderPlants(plants) {
+
+  if (!plantContainer) return;
+
   plantContainer.innerHTML = "";
 
   plants.forEach(plant => {
+
     const card = createPlantCard(plant);
+
     plantContainer.appendChild(card);
+
   });
+
 }
 
 
-// Add a plant to the user's garden plan
+// Add plant to garden plan
 function addToGarden(plant) {
 
   const plan = getGardenPlan();
 
-  const exists = plan.find(p => p.id === plant.id);
+  const exists = plan.find(item => item.id === plant.id);
 
   if (!exists) {
+
     plan.push(plant);
+
     saveGardenPlan(plan);
+
     renderGardenPlan();
+
   }
+
 }
 
 
-// Remove a plant from the garden plan
+// Remove plant from garden plan
 function removeFromGarden(id) {
 
   let plan = getGardenPlan();
 
-  plan = plan.filter(p => p.id !== id);
+  plan = plan.filter(plant => plant.id !== id);
 
   saveGardenPlan(plan);
+
   renderGardenPlan();
+
 }
 
 
-// Render the saved garden plan to the page
+// Render saved garden plan
 function renderGardenPlan() {
 
   const container = document.getElementById("garden-plan");
-  container.innerHTML = "";
+
+  if (!container) return;
 
   const plan = getGardenPlan();
 
+  container.innerHTML = "";
+
   if (plan.length === 0) {
+
     container.innerHTML = "<p>No plants added yet.</p>";
+
     return;
+
   }
 
   plan.forEach(plant => {
@@ -124,24 +153,28 @@ function renderGardenPlan() {
     const item = document.createElement("div");
 
     const name = document.createElement("span");
+
     name.textContent = plant.common_name || "Plant";
 
-    const removeBtn = document.createElement("button");
-    removeBtn.textContent = "Remove";
+    const removeButton = document.createElement("button");
 
-    removeBtn.addEventListener("click", () => {
+    removeButton.textContent = "Remove";
+
+    removeButton.addEventListener("click", () => {
       removeFromGarden(plant.id);
     });
 
     item.appendChild(name);
-    item.appendChild(removeBtn);
+    item.appendChild(removeButton);
 
     container.appendChild(item);
+
   });
+
 }
 
 
-// Initialize the application and load plant data
+// Initialize the application
 async function init() {
 
   const plants = await fetchPlants();
@@ -149,6 +182,7 @@ async function init() {
   renderPlants(plants);
 
   renderGardenPlan();
+
 }
 
 

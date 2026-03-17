@@ -1,33 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WDD330 Garden Planner</title>
-  <link rel="stylesheet" href="css/styles.css" />
+
+  <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
-  <header>
-    <h1>Garden Planner</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="flowers.html">Flowers</a>
-      <a href="vegetables.html">Vegetables</a>
-    </nav>
-  </header>
 
-  <main>
-    <section class="hero">
-      <h2>Plan Your Garden</h2>
-      <p>Browse plants, compare options, and save your selections.</p>
-    </section>
+<header class="site-header">
 
-    <section class="content">
-      <h3>Welcome</h3>
-      <p>This project will use external APIs to help build a garden planning experience.</p>
-    </section>
-  </main>
+  <h1>Garden Design Planner</h1>
 
-  <script type="module" src="js/main.js"></script>
+  <nav class="main-nav">
+    <a href="index.html">Home</a>
+    <a href="flowers.html">Flowers</a>
+    <a href="vegetables.html">Vegetables</a>
+  </nav>
+
+</header>
+
+
+<main>
+
+<section class="hero">
+
+  <h2>Design and Plan Your Garden</h2>
+
+  <p>
+    This project allows users to explore plants, learn about their growing needs,
+    and build a personal garden plan using real plant data from external APIs.
+  </p>
+
+</section>
+
+
+<section class="features">
+
+  <article class="feature-card">
+
+    <h3>Browse Plants</h3>
+
+    <p>
+      Search through flowers and vegetables to find plants that work for your
+      climate, garden space, and growing goals.
+    </p>
+
+  </article>
+
+
+  <article class="feature-card">
+
+    <h3>Plant Information</h3>
+
+    <p>
+      Each plant includes information such as sunlight requirements,
+      watering needs, and growing conditions gathered from plant APIs.
+    </p>
+
+  </article>
+
+
+  <article class="feature-card">
+
+    <h3>Save Your Garden Plan</h3>
+
+    <p>
+      Save the plants you want to grow and create a simple digital garden
+      layout for planning your space.
+    </p>
+
+  </article>
+
+</section>
+
+
+<section class="planner">
+
+  <h2>Your Garden Plan</h2>
+
+  <div id="garden-plan">
+
+    <p>No plants added yet.</p>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+<p>WDD330 Garden Planner Project</p>
+
+</footer>
+
+
+<script type="module" src="js/main.js"></script>
+
 </body>
+
 </html>

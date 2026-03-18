@@ -72,6 +72,7 @@ function renderPlants(plants) {
   if (!plantContainer) return;
   plantContainer.innerHTML = "";
   plants.forEach(plant => {
+    console.log("Plant object:", plant); // Log plant for debugging
     const card = buildPlantCard(plant);
     card.classList.add("plant-card");
     const button = document.createElement("button");
@@ -191,7 +192,7 @@ init();
 
 // Hamburger menu toggle
 const hamburger = document.getElementById("hamburger-menu");
-const navLinks = document.getElementById("nav-links");
+const navLinks = document.querySelector(".nav-links");
 if (hamburger && navLinks) {
   hamburger.addEventListener("click", () => {
     navLinks.classList.toggle("active");

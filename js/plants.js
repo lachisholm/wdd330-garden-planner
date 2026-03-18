@@ -52,13 +52,11 @@ export function buildPlantCard(plant) {
 
   const imageUrl = getPlantImage(plant);
 
-  if (imageUrl) {
-    const img = document.createElement("img");
-    img.src = imageUrl;
-    img.alt = formatPlantName(plant);
-    img.classList.add("plant-image");
-    card.appendChild(img);
-  }
+  const img = document.createElement("img");
+  img.src = imageUrl || "images/placeholder.jpg";
+  img.alt = formatPlantName(plant);
+  img.classList.add("plant-image");
+  card.appendChild(img);
 
   card.appendChild(title);
   card.appendChild(scientific);

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Garden Design</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main>
+    <h1>Garden Design & Layout</h1>
+    <section>
+      <h2>Your Garden Plan</h2>
+      <div id="garden-plan-list"></div>
+    </section>
+    <section>
+      <h2>Design Your Garden Area</h2>
+      <form id="garden-measurements">
+        <label for="width">Width (ft):</label>
+        <input type="number" id="width" name="width" min="1" required>
+        <label for="length">Length (ft):</label>
+        <input type="number" id="length" name="length" min="1" required>
+        <button type="submit">Set Area</button>
+      </form>
+      <div id="garden-map" style="margin-top:20px;"></div>
+    </section>
+  </main>
+  <footer>
+    <p>WDD330 Garden Planner Project</p>
+  </footer>
+  <nav class="navbar">
+    <div class="hamburger-menu" id="hamburger-menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="flowers.html">Flowers</a>
+      <a href="vegetables.html">Vegetables</a>
+      <a href="landscaping.html">Landscaping</a>
+      <a href="garden-design.html">Garden Design</a>
+    </div>
+  </nav>
+  <script type="module" src="./js/garden-design.js"></script>
+</body>
+</html>

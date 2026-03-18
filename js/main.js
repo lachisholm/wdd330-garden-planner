@@ -4,13 +4,15 @@ import { buildPlantCard } from "./plants.js";
 
 // API endpoint used to retrieve plant data
 // Updated API endpoints
+const PERENUAL_KEY = "sk-2cHp69b9f5142655c15545";
+const FLORA_KEY = "pk_CxAKhiCEpQzYTx8U30fpILD45A4XaRZc";
 const API_URLS = [
-  "https://www.perenual.com/api/v2/species-list?key=sk-2cHp69b9f5142655c15545",
-  // FloraAPI endpoint with provided key
-  "https://floraapi.com/api/v1/plants?key=pk_CxAKhiCEpQzYTx8U30fpILD45A4XaRZc"
+  `https://www.perenual.com/api/v2/species-list?key=${PERENUAL_KEY}`,
+  `https://floraapi.com/api/v1/plants?key=${FLORA_KEY}`
 ];
-// AgFarmAPI for vegetables page only
-const AGFARM_API_URL = "https://agfarmapi.com/api/v1/plants/search?q=vegetable";
+const PERENUAL_EDIBLE_URL = `https://www.perenual.com/api/v2/species-list?key=${PERENUAL_KEY}&edible=1`;
+const PERENUAL_FLOWER_URL = `https://www.perenual.com/api/v2/species-list?key=${PERENUAL_KEY}&q=flower`;
+const PERENUAL_LANDSCAPE_URL = `https://www.perenual.com/api/v2/species-list?key=${PERENUAL_KEY}&sunlight=full_sun`;
 
 
 // Get plant container from the HTML page
@@ -38,67 +40,48 @@ function saveGardenPlan(plan) {
 // Try each API in order until one returns valid data
 async function fetchPlants() {
   const page = window.location.pathname;
-  // Use AgFarmAPI for vegetables page
+  let url = API_URLS[0];
   if (page.includes("vegetables.html")) {
-    try {
-      const response = await fetch(AGFARM_API_URL);
-      const data = await response.json();
-      // agfarmapi: { plants: [...] }
-      if (data && Array.isArray(data.plants)) return data.plants;
-      // fallback: direct array
-      if (Array.isArray(data)) return data;
-    } catch (error) {
-      console.error("AgFarmAPI error:", error);
-    }
+    url = PERENUAL_EDIBLE_URL;
+  } else if (page.includes("flowers.html")) {
+    url = PERENUAL_FLOWER_URL;
+  } else if (page.includes("landscaping.html")) {
+    url = PERENUAL_LANDSCAPE_URL;
   }
-  // Otherwise, try other APIs
-  for (const url of API_URLS) {
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      // Try common response formats
-      if (data) {
-        // perenual: { data: [...] }
-        if (Array.isArray(data.data)) return data.data;
-        // floraapi: { plants: [...] }
-        if (Array.isArray(data.plants)) return data.plants;
-        // generic: { results: [...] }
-        if (Array.isArray(data.results)) return data.results;
-        // direct array
-        if (Array.isArray(data)) return data;
-      }
-    } catch (error) {
-      console.error("Plant API error:", error);
-    }
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    // perenual: { data: [...] }
+    if (data && Array.isArray(data.data)) return data.data;
+    // floraapi: { plants: [...] }
+    if (data && Array.isArray(data.plants)) return data.plants;
+    // generic: { results: [...] }
+    if (data && Array.isArray(data.results)) return data.results;
+    // direct array
+    if (Array.isArray(data)) return data;
+    return [];
+  } catch (error) {
+    console.error("Plant API error:", error);
+    return [];
   }
-  return [];
 }
 
 
 // Render plant cards to the page
 function renderPlants(plants) {
-
   if (!plantContainer) return;
-
   plantContainer.innerHTML = "";
-
   plants.forEach(plant => {
-
     const card = buildPlantCard(plant);
-
+    card.classList.add("plant-card");
     const button = document.createElement("button");
     button.textContent = "Add to Garden";
-
     button.addEventListener("click", () => {
       addToGarden(plant);
     });
-
     card.appendChild(button);
-
     plantContainer.appendChild(card);
-
   });
-
 }
 
 
@@ -205,3 +188,12 @@ async function init() {
 
 // Start the application
 init();
+
+// Hamburger menu toggle
+const hamburger = document.getElementById("hamburger-menu");
+const navLinks = document.getElementById("nav-links");
+if (hamburger && navLinks) {
+  hamburger.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+  });
+}

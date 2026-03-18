@@ -21,7 +21,7 @@ export function formatScientificName(plant) {
 
 // Utility function to safely read plant images
 export function getPlantImage(plant) {
-  // Try perenual, floraapi, plantnet, or fallback
+  // Try perenual, floraapi, or fallback
   if (plant.default_image && (plant.default_image.medium_url || plant.default_image.url)) {
     return plant.default_image.medium_url || plant.default_image.url;
   }

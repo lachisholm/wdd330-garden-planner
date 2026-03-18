@@ -39,10 +39,16 @@ async function fetchPlants() {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      // Adjust parsing for each API as needed
-      if (data && (data.data || data.results || Array.isArray(data))) {
-        // perenual: data.data, floraapi/plantnet: adapt as needed
-        return data.data || data.results || data;
+      // Try common response formats
+      if (data) {
+        // perenual: { data: [...] }
+        if (Array.isArray(data.data)) return data.data;
+        // floraapi: { plants: [...] }
+        if (Array.isArray(data.plants)) return data.plants;
+        // generic: { results: [...] }
+        if (Array.isArray(data.results)) return data.results;
+        // direct array
+        if (Array.isArray(data)) return data;
       }
     } catch (error) {
       console.error("Plant API error:", error);

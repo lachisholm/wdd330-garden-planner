@@ -5,9 +5,9 @@ import { buildPlantCard } from "./plants.js";
 // API endpoint used to retrieve plant data
 // Updated API endpoints
 const API_URLS = [
-  "https://www.perenual.com/api/v2/species-list?key=YOUR_KEY",
-  "https://floraapi.com", // Add endpoint details as needed
-  "https://plantnet.org"   // Add endpoint details as needed
+  "https://www.perenual.com/api/v2/species-list?key=sk-2cHp69b9f5142655c15545",
+  // FloraAPI endpoint with provided key
+  "https://floraapi.com/api/v1/plants?key=pk_CxAKhiCEpQzYTx8U30fpILD45A4XaRZc"
 ];
 
 

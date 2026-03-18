@@ -176,18 +176,10 @@ async function init() {
 
   const plants = await fetchPlants();
 
-  // Filter plants based on page
+  // Filter plants only for flowers page
   let filteredPlants = plants;
   const page = window.location.pathname;
-  if (page.includes("vegetables.html")) {
-    filteredPlants = plants.filter(plant => {
-      const name = (plant.common_name || plant.name || "").toLowerCase();
-      const category = (plant.category || plant.type || "").toLowerCase();
-      return name.includes("vegetable") || category.includes("vegetable") || name.includes("tomato") || name.includes("carrot") || name.includes("lettuce") || name.includes("pepper") || name.includes("cucumber") || name.includes("bean") || name.includes("onion") || name.includes("potato") || name.includes("squash") || name.includes("corn") || name.includes("broccoli") || name.includes("spinach");
-    });
-    // If no matches, show all
-    if (filteredPlants.length === 0) filteredPlants = plants;
-  } else if (page.includes("flowers.html")) {
+  if (page.includes("flowers.html")) {
     filteredPlants = plants.filter(plant => {
       const name = (plant.common_name || plant.name || "").toLowerCase();
       const category = (plant.category || plant.type || "").toLowerCase();

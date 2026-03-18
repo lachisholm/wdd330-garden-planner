@@ -3,7 +3,12 @@ import { buildPlantCard } from "./plants.js";
 
 
 // API endpoint used to retrieve plant data
-const API_URL = "https://perenual.com/api/species-list?key=sk-demo&page=1";
+// Updated API endpoints
+const API_URLS = [
+  "https://www.perenual.com/api/v2/species-list?key=YOUR_KEY",
+  "https://floraapi.com", // Add endpoint details as needed
+  "https://plantnet.org"   // Add endpoint details as needed
+];
 
 
 // Get plant container from the HTML page
@@ -28,24 +33,22 @@ function saveGardenPlan(plan) {
 
 
 // Fetch plant data from the API
+// Try each API in order until one returns valid data
 async function fetchPlants() {
-
-  try {
-
-    const response = await fetch(API_URL);
-
-    const data = await response.json();
-
-    return data.data || [];
-
-  } catch (error) {
-
-    console.error("Plant API error:", error);
-
-    return [];
-
+  for (const url of API_URLS) {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      // Adjust parsing for each API as needed
+      if (data && (data.data || data.results || Array.isArray(data))) {
+        // perenual: data.data, floraapi/plantnet: adapt as needed
+        return data.data || data.results || data;
+      }
+    } catch (error) {
+      console.error("Plant API error:", error);
+    }
   }
-
+  return [];
 }
 
 
@@ -81,16 +84,13 @@ function addToGarden(plant) {
 
   const plan = getGardenPlan();
 
-  const exists = plan.find(item => item.id === plant.id);
-
+  // Use id, species_id, or fallback to name as unique key
+  const plantId = plant.id || plant.species_id || plant.name || plant.common_name;
+  const exists = plan.find(item => (item.id || item.species_id || item.name || item.common_name) === plantId);
   if (!exists) {
-
     plan.push(plant);
-
     saveGardenPlan(plan);
-
     renderGardenPlan();
-
   }
 
 }
@@ -101,7 +101,7 @@ function removeFromGarden(id) {
 
   let plan = getGardenPlan();
 
-  plan = plan.filter(plant => plant.id !== id);
+  plan = plan.filter(plant => (plant.id || plant.species_id || plant.name || plant.common_name) !== id);
 
   saveGardenPlan(plan);
 
@@ -130,24 +130,19 @@ function renderGardenPlan() {
   }
 
   plan.forEach(plant => {
-
     const item = document.createElement("div");
-
     const name = document.createElement("span");
-    name.textContent = plant.common_name || "Plant";
-
+    name.textContent = plant.common_name || plant.name || plant.species || "Plant";
     const removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
-
+    // Use id, species_id, or fallback to name as unique key
+    const plantId = plant.id || plant.species_id || plant.name || plant.common_name;
     removeButton.addEventListener("click", () => {
-      removeFromGarden(plant.id);
+      removeFromGarden(plantId);
     });
-
     item.appendChild(name);
     item.appendChild(removeButton);
-
     container.appendChild(item);
-
   });
 
 }

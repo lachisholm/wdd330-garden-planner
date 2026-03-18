@@ -1,29 +1,39 @@
 // Utility function to format plant names safely
 export function formatPlantName(plant) {
-  return plant.common_name ? plant.common_name : "Unknown Plant";
+  // Try common_name, name, or fallback
+  return plant.common_name || plant.name || plant.species || "Unknown Plant";
 }
 
 
 // Utility function to format scientific names
 export function formatScientificName(plant) {
-  if (!plant.scientific_name) {
+  // Try scientific_name, latin, or fallback
+  const sci = plant.scientific_name || plant.latin || plant.scientific || plant.species_scientific;
+  if (!sci) {
     return "Scientific name unavailable";
   }
-
-  if (Array.isArray(plant.scientific_name)) {
-    return plant.scientific_name.join(", ");
+  if (Array.isArray(sci)) {
+    return sci.join(", ");
   }
-
-  return plant.scientific_name;
+  return sci;
 }
 
 
 // Utility function to safely read plant images
 export function getPlantImage(plant) {
-  if (plant.default_image && plant.default_image.medium_url) {
-    return plant.default_image.medium_url;
+  // Try perenual, floraapi, plantnet, or fallback
+  if (plant.default_image && (plant.default_image.medium_url || plant.default_image.url)) {
+    return plant.default_image.medium_url || plant.default_image.url;
   }
-
+  if (plant.image_url) {
+    return plant.image_url;
+  }
+  if (plant.images && Array.isArray(plant.images) && plant.images.length > 0) {
+    return plant.images[0].url || plant.images[0];
+  }
+  if (plant.picture) {
+    return plant.picture;
+  }
   return "";
 }
 

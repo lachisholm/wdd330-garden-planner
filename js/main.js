@@ -9,6 +9,8 @@ const API_URLS = [
   // FloraAPI endpoint with provided key
   "https://floraapi.com/api/v1/plants?key=pk_CxAKhiCEpQzYTx8U30fpILD45A4XaRZc"
 ];
+// AgFarmAPI for vegetables page only
+const AGFARM_API_URL = "https://agfarmapi.com/api/v1/plants/search?q=vegetable";
 
 
 // Get plant container from the HTML page
@@ -35,6 +37,21 @@ function saveGardenPlan(plan) {
 // Fetch plant data from the API
 // Try each API in order until one returns valid data
 async function fetchPlants() {
+  const page = window.location.pathname;
+  // Use AgFarmAPI for vegetables page
+  if (page.includes("vegetables.html")) {
+    try {
+      const response = await fetch(AGFARM_API_URL);
+      const data = await response.json();
+      // agfarmapi: { plants: [...] }
+      if (data && Array.isArray(data.plants)) return data.plants;
+      // fallback: direct array
+      if (Array.isArray(data)) return data;
+    } catch (error) {
+      console.error("AgFarmAPI error:", error);
+    }
+  }
+  // Otherwise, try other APIs
   for (const url of API_URLS) {
     try {
       const response = await fetch(url);
@@ -159,8 +176,36 @@ async function init() {
 
   const plants = await fetchPlants();
 
-  renderPlants(plants);
+  // Filter plants based on page
+  let filteredPlants = plants;
+  const page = window.location.pathname;
+  if (page.includes("vegetables.html")) {
+    filteredPlants = plants.filter(plant => {
+      const name = (plant.common_name || plant.name || "").toLowerCase();
+      const category = (plant.category || plant.type || "").toLowerCase();
+      return name.includes("vegetable") || category.includes("vegetable") || name.includes("tomato") || name.includes("carrot") || name.includes("lettuce") || name.includes("pepper") || name.includes("cucumber") || name.includes("bean") || name.includes("onion") || name.includes("potato") || name.includes("squash") || name.includes("corn") || name.includes("broccoli") || name.includes("spinach");
+    });
+    // If no matches, show all
+    if (filteredPlants.length === 0) filteredPlants = plants;
+  } else if (page.includes("flowers.html")) {
+    filteredPlants = plants.filter(plant => {
+      const name = (plant.common_name || plant.name || "").toLowerCase();
+      const category = (plant.category || plant.type || "").toLowerCase();
+      return name.includes("flower") || category.includes("flower") || name.includes("rose") || name.includes("daisy") || name.includes("lily") || name.includes("tulip") || name.includes("marigold") || name.includes("sunflower") || name.includes("iris") || name.includes("poppy") || name.includes("zinnia") || name.includes("petunia") || name.includes("peony");
+    });
+    // If no matches, show all
+    if (filteredPlants.length === 0) filteredPlants = plants;
+  }
 
+  // Show message if no plants found
+  if (!filteredPlants || filteredPlants.length === 0) {
+    const container = document.getElementById("plant-container");
+    if (container) container.innerHTML = "<p>No plants found.</p>";
+    renderGardenPlan();
+    return;
+  }
+
+  renderPlants(filteredPlants);
   renderGardenPlan();
 
 }

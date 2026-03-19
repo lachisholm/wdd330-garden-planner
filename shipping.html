@@ -11,13 +11,22 @@
   <main>
     <section class="feature-card">
       <h2>Shipping</h2>
-      <div class="shipping-grid">
-        <p>Shipping details and options will be available soon.</p>
-      </div>
+      <form id="shipping-form" class="shipping-form">
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required>
+        <label for="zip">ZIP Code:</label>
+        <input type="text" id="zip" name="zip" required>
+        <button type="submit" class="checkout-btn">Submit Shipping</button>
+      </form>
+      <div id="shipping-message" class="message"></div>
     </section>
   </main>
   <footer class="footer">
     <!-- Footer injected by inject-header-footer.js -->
-</body>
+  </footer>
   <script type="module" src="js/inject-header-footer.js"></script>
+  <script type="module" src="js/shipping.js"></script>
+</body>
 </html>

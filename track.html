@@ -11,16 +11,21 @@
   <main>
     <section class="feature-card">
       <h2>Track Your Order</h2>
-      <div class="track-grid">
-        <p>Order tracking will be available soon.</p>
-        <div style="padding-top: 32px;">
-          <a href="confirmation.html" class="checkout-btn">Back to Confirmation</a>
-        </div>
+      <form id="track-form" class="track-form">
+        <label for="orderNumber">Order Number:</label>
+        <input type="text" id="orderNumber" name="orderNumber" required>
+        <button type="submit" class="checkout-btn">Track Order</button>
+      </form>
+      <div id="track-message" class="message"></div>
+      <div style="padding-top: 32px;">
+        <a href="confirmation.html" class="checkout-btn">Back to Confirmation</a>
       </div>
     </section>
   </main>
   <footer class="footer">
     <!-- Footer injected by inject-header-footer.js -->
-</body>
+  </footer>
   <script type="module" src="js/inject-header-footer.js"></script>
+  <script type="module" src="js/track.js"></script>
+</body>
 </html>

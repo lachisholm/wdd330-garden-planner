@@ -1,29 +1,51 @@
+<!-- Document type declaration -->
 <!DOCTYPE html>
+<!-- Root HTML element with language attribute -->
 <html lang="en">
+<!-- Head section starts -->
 <head>
+  <!-- Character encoding for the document -->
   <meta charset="UTF-8">
+  <!-- Responsive viewport settings -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Page title -->
   <title>Payment</title>
+  <!-- Link to external stylesheet -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
+<!-- Body section starts -->
 <body>
   <!-- Header and nav injected by inject-header-footer.js -->
+  <!-- Main content area -->
   <main>
+    <!-- Section for payment options -->
     <section class="feature-card">
+      <!-- Section heading -->
       <h2>Payment Options</h2>
+      <!-- Payment form -->
       <form id="payment-form">
+        <!-- Payment methods selection -->
         <div class="payment-methods">
+          <!-- Credit card radio button -->
           <label><input type="radio" name="method" value="credit" checked> Credit Card</label><br>
+          <!-- PayPal radio button -->
           <label><input type="radio" name="method" value="paypal"> PayPal</label><br>
+          <!-- Apple Pay radio button -->
           <label><input type="radio" name="method" value="applepay"> Apple Pay</label><br>
         </div>
+        <!-- Credit card details section -->
         <div class="payment-details" id="credit-details">
+          <!-- Card number input -->
           <label>Card Number:<br><input type="text" name="cardNumber" maxlength="19" required></label><br>
+          <!-- Expiry date input -->
           <label>Expiry Date:<br><input type="text" name="expiry" placeholder="MM/YY" maxlength="5" required></label><br>
+          <!-- CVV input -->
           <label>CVV:<br><input type="text" name="cvv" maxlength="4" required></label><br>
         </div>
+        <!-- Submit button for payment -->
         <button type="submit" class="checkout-btn">Pay Now</button>
       </form>
+      <!-- Message area for payment status -->
       <div id="payment-message"></div>
     </section>
   </main>

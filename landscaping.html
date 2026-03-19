@@ -1,20 +1,33 @@
+<!-- Document type declaration -->
 <!DOCTYPE html>
+<!-- Root HTML element with language attribute -->
 <html lang="en">
+<!-- Head section starts -->
 <head>
+  <!-- Character encoding for the document -->
   <meta charset="UTF-8">
+  <!-- Responsive viewport settings -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Page title -->
   <title>Landscaping Plants</title>
+  <!-- Link to external stylesheet -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
+<!-- Body section starts -->
 <body>
+  <!-- Header section with site title and navigation -->
   <header class="site-header">
+    <!-- Main heading for site -->
     <h1>Garden Design Planner</h1>
+    <!-- Navigation bar -->
     <nav class="navbar">
+      <!-- Hamburger menu for mobile navigation -->
       <div class="hamburger-menu" id="hamburger-menu">
         <span></span>
         <span></span>
         <span></span>
       </div>
+      <!-- Navigation links -->
       <div class="nav-links" id="nav-links">
         <a href="index.html">Home</a>
         <a href="flowers.html">Flowers</a>
@@ -25,21 +38,30 @@
       </div>
     </nav>
   </header>
+  <!-- Main content area -->
   <main>
+    <!-- Main heading for landscaping plants -->
     <h1>Landscaping Plants</h1>
+    <!-- Section for plant display -->
     <section>
+      <!-- Container for plants loaded from API -->
       <div id="plant-container"></div>
     </section>
+    <!-- Section for saved garden plan -->
     <section class="planner">
+      <!-- Section heading -->
       <h2>Your Garden Plan</h2>
+      <!-- Container for garden plan items -->
       <div id="garden-plan">
         <p>No plants added yet.</p>
       </div>
     </section>
   </main>
+  <!-- Footer section -->
   <footer>
     <p>WDD330 Garden Planner Project</p>
   </footer>
+  <!-- Script for main functionality -->
   <script type="module" src="./js/main.js"></script>
 </body>
 </html>

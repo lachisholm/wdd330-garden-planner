@@ -28,6 +28,7 @@ function injectHeaderFooter() {
       // Find hamburger menu and nav links
       const hamburger = document.getElementById('hamburger-menu');
       const navLinks = document.getElementById('nav-links');
+      
       // Add click event to hamburger menu for mobile nav toggle
       if (hamburger && navLinks) {
         hamburger.addEventListener('click', () => {

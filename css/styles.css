@@ -241,3 +241,42 @@ footer {
 .site-title:hover {
   color: #e0b3ff;
 }
+
+/*=====================================================
+Cart Page Styles
+=====================================================*/
+.cart-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.checkout-btn {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  margin-top: 24px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.checkout-btn:hover {
+  background: #6a1b9a;
+}
+
+/*=====================================================
+Payment Page Styles
+=====================================================*/
+.payment-methods {
+  margin-bottom: 16px;
+}
+.payment-details {
+  margin-bottom: 16px;
+}
+#payment-message {
+  margin-top: 16px;
+  font-weight: bold;
+}

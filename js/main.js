@@ -71,16 +71,35 @@ async function fetchPlants() {
 function renderPlants(plants) {
   if (!plantContainer) return;
   plantContainer.innerHTML = "";
+  const page = window.location.pathname;
   plants.forEach(plant => {
-    console.log("Plant object:", plant); // Log plant for debugging
     const card = buildPlantCard(plant);
     card.classList.add("plant-card");
-    const button = document.createElement("button");
-    button.textContent = "Add to Garden";
-    button.addEventListener("click", () => {
+    // Add to Garden button
+    const gardenBtn = document.createElement("button");
+    gardenBtn.textContent = "Add to Garden";
+    gardenBtn.addEventListener("click", () => {
       addToGarden(plant);
     });
-    card.appendChild(button);
+    card.appendChild(gardenBtn);
+    // Add to Cart button (only for flowers and vegetables pages)
+    if (page.includes("flowers.html") || page.includes("vegetables.html")) {
+      const cartBtn = document.createElement("button");
+      cartBtn.textContent = "Add to Cart";
+      cartBtn.addEventListener("click", () => {
+        // Save to cart (gardenPlan localStorage)
+        let cart = getGardenPlan();
+        const plantId = plant.id || plant.species_id || plant.name || plant.common_name;
+        const exists = cart.find(item => (item.id || item.species_id || item.name || item.common_name) === plantId);
+        if (!exists) {
+          cart.push(plant);
+          saveGardenPlan(cart);
+        }
+        // Redirect to cart page
+        window.location.href = "cart.html";
+      });
+      card.appendChild(cartBtn);
+    }
     plantContainer.appendChild(card);
   });
 }

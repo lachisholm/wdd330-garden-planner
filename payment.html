@@ -23,10 +23,21 @@
   </nav>
   <main>
     <section class="feature-card">
-      <h2>Payment</h2>
-      <div class="payment-grid">
-        <p>Secure payment processing coming soon.</p>
-      </div>
+      <h2>Payment Options</h2>
+      <form id="payment-form">
+        <div class="payment-methods">
+          <label><input type="radio" name="method" value="credit" checked> Credit Card</label><br>
+          <label><input type="radio" name="method" value="paypal"> PayPal</label><br>
+          <label><input type="radio" name="method" value="applepay"> Apple Pay</label><br>
+        </div>
+        <div class="payment-details" id="credit-details">
+          <label>Card Number:<br><input type="text" name="cardNumber" maxlength="19" required></label><br>
+          <label>Expiry Date:<br><input type="text" name="expiry" placeholder="MM/YY" maxlength="5" required></label><br>
+          <label>CVV:<br><input type="text" name="cvv" maxlength="4" required></label><br>
+        </div>
+        <button type="submit" class="checkout-btn">Pay Now</button>
+      </form>
+      <div id="payment-message"></div>
     </section>
   </main>
   <footer class="footer">

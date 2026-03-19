@@ -1,28 +1,50 @@
+<!-- Document type declaration -->
 <!DOCTYPE html>
+<!-- Root HTML element with language attribute -->
 <html lang="en">
+<!-- Head section starts -->
 <head>
+  <!-- Character encoding for the document -->
   <meta charset="UTF-8">
+  <!-- Responsive viewport settings -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Page title -->
   <title>Garden Design</title>
+  <!-- Link to external stylesheet -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
+<!-- Body section starts -->
 <body>
   <!-- Header and nav injected by inject-header-footer.js -->
+  <!-- Main content area -->
   <main>
+    <!-- Main heading for garden design -->
     <h1>Garden Design & Layout</h1>
+    <!-- Section for garden plan list -->
     <section>
+      <!-- Section heading -->
       <h2>Your Garden Plan</h2>
+      <!-- Container for garden plan items -->
       <div id="garden-plan-list"></div>
     </section>
+    <!-- Section for garden area design -->
     <section>
+      <!-- Section heading -->
       <h2>Design Your Garden Area</h2>
+      <!-- Form for garden measurements -->
       <form id="garden-measurements">
+        <!-- Label for width input -->
         <label for="width">Width (ft):</label>
+        <!-- Input for garden width -->
         <input type="number" id="width" name="width" min="1" required>
+        <!-- Label for length input -->
         <label for="length">Length (ft):</label>
+        <!-- Input for garden length -->
         <input type="number" id="length" name="length" min="1" required>
+        <!-- Submit button for area -->
         <button type="submit">Set Area</button>
       </form>
+      <!-- Container for garden map visualization -->
       <div id="garden-map" style="margin-top:20px;"></div>
     </section>
   </main>

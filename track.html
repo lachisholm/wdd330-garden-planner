@@ -1,31 +1,51 @@
+<!-- Document type declaration -->
 <!DOCTYPE html>
+<!-- Root HTML element with language attribute -->
 <html lang="en">
+<!-- Head section starts -->
 <head>
+  <!-- Character encoding for the document -->
   <meta charset="UTF-8">
+  <!-- Responsive viewport settings -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Page title -->
   <title>Track Your Order</title>
+  <!-- Link to external stylesheet -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
+<!-- Body section starts -->
 <body>
   <!-- Header and nav injected by inject-header-footer.js -->
+  <!-- Main content area -->
   <main>
+    <!-- Section for order tracking -->
     <section class="feature-card">
+      <!-- Section heading -->
       <h2>Track Your Order</h2>
+      <!-- Order tracking form -->
       <form id="track-form" class="track-form">
+        <!-- Label for order number input -->
         <label for="orderNumber">Order Number:</label>
+        <!-- Input for order number -->
         <input type="text" id="orderNumber" name="orderNumber" required>
+        <!-- Submit button for tracking -->
         <button type="submit" class="checkout-btn">Track Order</button>
       </form>
+      <!-- Message area for tracking status -->
       <div id="track-message" class="message"></div>
+      <!-- Link to confirmation page -->
       <div style="padding-top: 32px;">
         <a href="confirmation.html" class="checkout-btn">Back to Confirmation</a>
       </div>
     </section>
   </main>
+  <!-- Footer section -->
   <footer class="footer">
     <!-- Footer injected by inject-header-footer.js -->
   </footer>
+  <!-- Script for header/footer injection -->
   <script type="module" src="js/inject-header-footer.js"></script>
+  <!-- Script for tracking functionality -->
   <script type="module" src="js/track.js"></script>
 </body>
 </html>

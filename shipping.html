@@ -1,32 +1,55 @@
+<!-- Document type declaration -->
 <!DOCTYPE html>
+<!-- Root HTML element with language attribute -->
 <html lang="en">
+<!-- Head section starts -->
 <head>
+  <!-- Character encoding for the document -->
   <meta charset="UTF-8">
+  <!-- Responsive viewport settings -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Page title -->
   <title>Shipping</title>
+  <!-- Link to external stylesheet -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
+<!-- Body section starts -->
 <body>
   <!-- Header and nav injected by inject-header-footer.js -->
+  <!-- Main content area -->
   <main>
+    <!-- Section for shipping details -->
     <section class="feature-card">
+      <!-- Section heading -->
       <h2>Shipping</h2>
+      <!-- Shipping form for user input -->
       <form id="shipping-form" class="shipping-form">
+        <!-- Label for address input -->
         <label for="address">Address:</label>
+        <!-- Input for address -->
         <input type="text" id="address" name="address" required>
+        <!-- Label for city input -->
         <label for="city">City:</label>
+        <!-- Input for city -->
         <input type="text" id="city" name="city" required>
+        <!-- Label for ZIP code input -->
         <label for="zip">ZIP Code:</label>
+        <!-- Input for ZIP code -->
         <input type="text" id="zip" name="zip" required>
+        <!-- Submit button for shipping form -->
         <button type="submit" class="checkout-btn">Submit Shipping</button>
       </form>
+      <!-- Message area for shipping status -->
       <div id="shipping-message" class="message"></div>
     </section>
   </main>
+  <!-- Footer section -->
   <footer class="footer">
     <!-- Footer injected by inject-header-footer.js -->
   </footer>
+  <!-- Script for header/footer injection -->
   <script type="module" src="js/inject-header-footer.js"></script>
+  <!-- Script for shipping functionality -->
   <script type="module" src="js/shipping.js"></script>
 </body>
 </html>

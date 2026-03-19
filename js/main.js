@@ -82,8 +82,8 @@ function renderPlants(plants) {
       addToGarden(plant);
     });
     card.appendChild(gardenBtn);
-    // Add to Cart button (only for flowers and vegetables pages)
-    if (page.includes("flowers.html") || page.includes("vegetables.html")) {
+    // Add to Cart button (for flowers, vegetables, and landscaping pages)
+    if (page.includes("flowers.html") || page.includes("vegetables.html") || page.includes("landscaping.html")) {
       const cartBtn = document.createElement("button");
       cartBtn.textContent = "Add to Cart";
       cartBtn.addEventListener("click", () => {

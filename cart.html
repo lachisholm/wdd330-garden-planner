@@ -1,26 +1,42 @@
+<!-- Document type declaration -->
 <!DOCTYPE html>
+<!-- Root HTML element with language attribute -->
 <html lang="en">
+<!-- Head section starts -->
 <head>
+  <!-- Character encoding for the document -->
   <meta charset="UTF-8">
+  <!-- Responsive viewport settings -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Page title -->
   <title>Shopping Cart</title>
+  <!-- Link to external stylesheet -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
+<!-- Body section starts -->
 <body>
   <!-- Header and nav injected by inject-header-footer.js -->
+  <!-- Main content area -->
   <main>
+    <!-- Section for shopping cart -->
     <section class="feature-card">
+      <!-- Section heading -->
       <h2>Shopping Cart</h2>
+      <!-- Container for cart items -->
       <div class="cart-grid" id="cart-grid">
         <!-- Cart items will be rendered here by cart.js -->
       </div>
+      <!-- Message area for cart status -->
       <div id="cart-message" class="message"></div>
     </section>
   </main>
+  <!-- Footer section -->
   <footer class="footer">
     <!-- Footer injected by inject-header-footer.js -->
   </footer>
+  <!-- Script for cart functionality -->
   <script type="module" src="js/cart.js"></script>
+  <!-- Script for header/footer injection -->
   <script type="module" src="js/inject-header-footer.js"></script>
 </body>
 </html>

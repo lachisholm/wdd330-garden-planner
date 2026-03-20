@@ -2,6 +2,14 @@
 // Handles shipping form submission and validation
 
 document.addEventListener("DOMContentLoaded", () => {
+    // Add event listener for Clear Form button
+    const clearBtn = document.getElementById("clear-shipping-form");
+    if (clearBtn) {
+      clearBtn.addEventListener("click", () => {
+        form.reset();
+        shippingMessage.textContent = "";
+      });
+    }
   // Get shipping form element
   const form = document.getElementById("shipping-form");
   // Get shipping message display element
@@ -49,6 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
       // Show success message for shipping
       shippingMessage.textContent = "Shipping details saved! Your order is on its way.";
       shippingMessage.style.color = "#27ae60";
+      // Reset the form fields after successful submission
+      form.reset();
       // Auto-hide the message after 10 seconds
       setTimeout(() => {
         shippingMessage.textContent = "";

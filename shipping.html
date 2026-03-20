@@ -103,8 +103,11 @@
         </select>
         <!-- Message for country restriction -->
         <div id="country-message" style="display:none; color:#c0392b; font-weight:bold; margin-top:8px;"></div>
-        <!-- Submit button for shipping form -->
-        <button type="submit" class="checkout-btn">Submit Shipping</button>
+        <!-- Submit and Clear buttons for shipping form -->
+        <div style="display:flex; gap:12px; margin-top:12px;">
+          <button type="submit" class="checkout-btn">Submit Shipping</button>
+          <button type="button" id="clear-shipping-form" class="checkout-btn" style="background:#bdbdbd; color:#333;">Clear Form</button>
+        </div>
       </form>
       <!-- Message area for shipping status -->
       <div id="shipping-message" class="message"></div>

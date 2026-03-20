@@ -282,7 +282,7 @@ Payment Page Styles
   font-weight: bold; /* Bold payment message, #payment-message */
 }
 
-.shipping-form { display: flex; flex-direction: column; gap: 16px; max-width: 400px; margin: 0 auto; align-items: center; text-align: center; } /* Centers shipping form fields, shipping page */
-.shipping-form label { font-weight: bold; margin-bottom: 2px; padding: 0; } /* Reduced margin and no padding, shipping form */
-.shipping-form input, .shipping-form select { padding: 4px; border: 1px solid #b39ddb; border-radius: 4px; font-size: 1rem; margin-bottom: 4px; } /* Reduced padding and margin, shipping form */
+.shipping-form { display: flex; flex-direction: column; gap: 6px; max-width: 400px; margin: 0 auto; align-items: flex-start; text-align: left; } /* Aligns shipping form labels and fields to the left, shipping page */
+.shipping-form label { font-weight: bold; margin-bottom: 0; padding: 0; } /* No margin below label, shipping form */
+.shipping-form input, .shipping-form select { padding: 4px; border: 1px solid #b39ddb; border-radius: 4px; font-size: 1rem; margin-bottom: 1px; } /* Minimal margin below input/select, shipping form */
 .shipping-form button { margin-top: 8px; } /* Reduced space above submit button, shipping form */

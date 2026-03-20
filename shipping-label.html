@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shipping Label</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .label-container { max-width: 400px; margin: 40px auto; padding: 24px; border: 2px solid #b39ddb; border-radius: 12px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .label-title { font-size: 1.5rem; font-weight: bold; color: #6a1b9a; margin-bottom: 16px; }
+    .label-field { font-size: 1.1rem; margin-bottom: 8px; }
+    .print-btn { margin-top: 24px; padding: 12px 24px; background: #7c3aed; color: #fff; border: none; border-radius: 6px; font-size: 1rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="label-container">
+    <div class="label-title">Shipping Label</div>
+    <div id="label-fields"></div>
+    <button class="print-btn" onclick="window.print()">Print Label</button>
+  </div>
+  <script>
+    // Load shipping info from localStorage
+    const info = JSON.parse(localStorage.getItem('shippingInfo'));
+    const fields = document.getElementById('label-fields');
+    if (info) {
+      fields.innerHTML = `
+        <div class='label-field'><strong>Name:</strong> ${info.name}</div>
+        <div class='label-field'><strong>Address:</strong> ${info.address}</div>
+        <div class='label-field'><strong>City:</strong> ${info.city}</div>
+        <div class='label-field'><strong>State:</strong> ${info.state}</div>
+        <div class='label-field'><strong>ZIP:</strong> ${info.zip}</div>
+        <div class='label-field'><strong>Country:</strong> ${info.country}</div>
+      `;
+    } else {
+      fields.innerHTML = "<div class='label-field' style='color:#c0392b;'>No shipping info found.</div>";
+    }
+  </script>
+</body>
+</html>

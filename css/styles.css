@@ -28,255 +28,242 @@ Layout Notes
 • Neutral color palette for clarity
 =====================================================*/
 
-
 /*=====================================================
 Global Reset
 =====================================================*/
-
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  box-sizing: border-box; /* Ensures padding/border included in width/height, all elements */
+  margin: 0; /* Removes default margin, all elements */
+  padding: 0; /* Removes default padding, all elements */
 }
-
-
 
 /*=====================================================
 Body
 =====================================================*/
-
 body {
-  background-color: #f4f6f7;
-  color: #2c3e50;
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.6;
+  background-color: #f4f6f7; /* Sets light background, applies to body */
+  color: #2c3e50; /* Sets primary text color, applies to body */
+  font-family: Arial, Helvetica, sans-serif; /* Sets font, applies to body */
+  line-height: 1.6; /* Improves readability, applies to body */
 }
-
-
 
 /*=====================================================
 Header
 =====================================================*/
-
 .site-header {
-  background-color: #7c3aed; /* Sleek purple, high contrast */
-  color: #ffffff;
-  padding: 20px;
-  text-align: center;
+  background-color: #7c3aed; /* Sleek purple header, applies to .site-header */
+  color: #ffffff; /* White text, applies to .site-header */
+  padding: 20px; /* Adds space inside header, applies to .site-header */
+  text-align: center; /* Centers header content, applies to .site-header */
 }
-
 .site-header h1 {
-  margin-bottom: 10px;
-  text-align: center;
+  margin-bottom: 10px; /* Space below site title, applies to header h1 */
+  text-align: center; /* Centers site title, applies to header h1 */
 }
-
-
 
 /*=====================================================
 Navigation
 =====================================================*/
-
 .navbar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  padding: 16px 0;
+  display: flex; /* Flex layout for nav bar, applies to .navbar */
+  align-items: center; /* Vertically centers nav items, .navbar */
+  justify-content: center; /* Horizontally centers nav items, .navbar */
+  position: relative; /* Allows absolute children, .navbar */
+  padding: 16px 0; /* Vertical space, .navbar */
 }
 .site-name {
-  flex: 1;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
+  flex: 1; /* Fills available space, .site-name */
+  text-align: center; /* Centers site name, .site-name */
+  font-size: 2rem; /* Large font, .site-name */
+  font-weight: bold; /* Bold text, .site-name */
 }
 .nav-links {
-  display: flex;
-  gap: 24px;
+  display: flex; /* Flex layout for nav links, .nav-links */
+  gap: 24px; /* Space between nav links, .nav-links */
 }
 .nav-links a {
-  color: #fff !important;
-  text-decoration: none;
-  font-size: 1.1rem;
-  padding: 8px 16px;
-  border-radius: 4px;
-  transition: background 0.3s, color 0.3s;
+  color: #fff !important; /* White nav link text, .nav-links a */
+  text-decoration: none; /* Removes underline, .nav-links a */
+  font-size: 1.1rem; /* Slightly larger font, .nav-links a */
+  padding: 8px 16px; /* Space around nav links, .nav-links a */
+  border-radius: 4px; /* Rounded corners, .nav-links a */
+  transition: background 0.3s, color 0.3s; /* Smooth hover, .nav-links a */
 }
 .nav-links a:hover {
-  background: #e0b3ff;
-  color: #222;
+  background: #e0b3ff; /* Light purple hover, .nav-links a */
+  color: #222; /* Dark text on hover, .nav-links a */
 }
 .hamburger-menu {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  margin-right: 16px;
+  display: none; /* Hidden by default, .hamburger-menu */
+  flex-direction: column; /* Stacks bars vertically, .hamburger-menu */
+  justify-content: center; /* Centers bars, .hamburger-menu */
+  align-items: flex-start; /* Left-aligns bars, .hamburger-menu */
+  width: 40px; /* Width of hamburger, .hamburger-menu */
+  height: 40px; /* Height of hamburger, .hamburger-menu */
+  cursor: pointer; /* Pointer cursor, .hamburger-menu */
+  margin-right: 16px; /* Space to right, .hamburger-menu */
 }
 .hamburger-menu span {
-  display: block;
-  height: 4px;
-  width: 28px;
-  background: #333;
-  margin: 5px 0;
-  border-radius: 2px;
-  transition: background 0.3s;
+  display: block; /* Each bar is block, .hamburger-menu span */
+  height: 4px; /* Bar thickness, .hamburger-menu span */
+  width: 28px; /* Bar width, .hamburger-menu span */
+  background: #333; /* Bar color, .hamburger-menu span */
+  margin: 5px 0; /* Space between bars, .hamburger-menu span */
+  border-radius: 2px; /* Rounded bar ends, .hamburger-menu span */
+  transition: background 0.3s; /* Smooth color change, .hamburger-menu span */
 }
 
-/* Plant card grid layout */
 #plant-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 24px;
-  margin: 32px 0;
+  display: grid; /* Grid layout for plant cards, #plant-container */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns, #plant-container */
+  gap: 24px; /* Space between cards, #plant-container */
+  margin: 32px 0; /* Vertical margin, #plant-container */
 }
 
 .plant-card {
-  background: #fff;
-  border: 2px solid #b39ddb;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: box-shadow 0.3s;
+  background: #fff; /* White card background, .plant-card */
+  border: 2px solid #b39ddb; /* Purple border, .plant-card */
+  border-radius: 12px; /* Rounded corners, .plant-card */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Subtle shadow, .plant-card */
+  padding: 20px; /* Space inside card, .plant-card */
+  display: flex; /* Flex layout, .plant-card */
+  flex-direction: column; /* Stack content vertically, .plant-card */
+  align-items: center; /* Center content, .plant-card */
+  transition: box-shadow 0.3s; /* Smooth shadow change, .plant-card */
 }
 
 .plant-card:hover {
-  box-shadow: 0 4px 16px rgba(120, 60, 200, 0.15);
+  box-shadow: 0 4px 16px rgba(120, 60, 200, 0.15); /* Stronger shadow on hover, .plant-card */
 }
 
 .plant-card img {
-  width: 100%;
-  max-width: 180px;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 12px;
+  width: 100%; /* Full width image, .plant-card img */
+  max-width: 180px; /* Max image width, .plant-card img */
+  height: auto; /* Responsive height, .plant-card img */
+  border-radius: 8px; /* Rounded image corners, .plant-card img */
+  margin-bottom: 12px; /* Space below image, .plant-card img */
 }
 
 .plant-card h3 {
-  color: #6a1b9a;
-  margin-bottom: 8px;
-  font-size: 1.2rem;
+  color: #6a1b9a; /* Purple heading, .plant-card h3 */
+  margin-bottom: 8px; /* Space below heading, .plant-card h3 */
+  font-size: 1.2rem; /* Medium font, .plant-card h3 */
 }
 
 .plant-card p {
-  color: #333;
-  margin-bottom: 8px;
-  font-size: 1rem;
+  color: #333; /* Dark text, .plant-card p */
+  margin-bottom: 8px; /* Space below text, .plant-card p */
+  font-size: 1rem; /* Standard font, .plant-card p */
 }
 
 .plant-card button {
-  background: #8e24aa;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 8px 16px;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-top: 8px;
-  transition: background 0.3s;
+  background: #8e24aa; /* Purple button, .plant-card button */
+  color: #fff; /* White text, .plant-card button */
+  border: none; /* No border, .plant-card button */
+  border-radius: 6px; /* Rounded corners, .plant-card button */
+  padding: 8px 16px; /* Space inside button, .plant-card button */
+  font-size: 1rem; /* Standard font, .plant-card button */
+  cursor: pointer; /* Pointer cursor, .plant-card button */
+  margin-top: 8px; /* Space above button, .plant-card button */
+  transition: background 0.3s; /* Smooth color change, .plant-card button */
 }
 
 .plant-card button:hover {
-  background: #d1c4e9;
-  color: #6a1b9a;
+  background: #d1c4e9; /* Light purple hover, .plant-card button */
+  color: #6a1b9a; /* Purple text on hover, .plant-card button */
 }
 
 @media (max-width: 768px) {
   .nav-links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    left: 0;
-    top: 60px;
-    background: #fff;
-    width: 100%;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    z-index: 10;
+    display: none; /* Hide nav links on mobile, .nav-links */
+    flex-direction: column; /* Stack nav links, .nav-links */
+    position: absolute; /* Position for dropdown, .nav-links */
+    left: 0; /* Align left, .nav-links */
+    top: 60px; /* Position below header, .nav-links */
+    background: #fff; /* White background, .nav-links */
+    width: 100%; /* Full width, .nav-links */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Subtle shadow, .nav-links */
+    z-index: 10; /* Above other content, .nav-links */
   }
   .nav-links.active {
-    display: flex;
+    display: flex; /* Show nav links when active, .nav-links.active */
   }
   .hamburger-menu {
-    display: flex;
+    display: flex; /* Show hamburger on mobile, .hamburger-menu */
   }
   #plant-container {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    grid-template-columns: 1fr; /* Single column on mobile, #plant-container */
+    gap: 16px; /* Smaller gap on mobile, #plant-container */
   }
 }
 
 main {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 24px;
-  box-sizing: border-box;
+  max-width: 1200px; /* Limits main content width, main */
+  margin: 0 auto; /* Centers main content, main */
+  padding: 24px; /* Space around main content, main */
+  box-sizing: border-box; /* Includes padding in width, main */
 }
 .hero, .features, .planner {
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 16px;
-  padding-right: 16px;
+  margin-left: auto; /* Centers sections, .hero/.features/.planner */
+  margin-right: auto; /* Centers sections, .hero/.features/.planner */
+  padding-left: 16px; /* Space left, .hero/.features/.planner */
+  padding-right: 16px; /* Space right, .hero/.features/.planner */
 }
 
 footer {
-  text-align: center;
-  padding: 24px 16px;
-  background: #6a1b9a;
-  color: #fff;
-  font-size: 1.1rem;
-  margin-top: 32px;
+  text-align: center; /* Centers footer text, footer */
+  padding: 24px 16px; /* Space inside footer, footer */
+  background: #6a1b9a; /* Purple footer background, footer */
+  color: #fff; /* White footer text, footer */
+  font-size: 1.1rem; /* Slightly larger font, footer */
+  margin-top: 32px; /* Space above footer, footer */
 }
 
 .site-title {
-  color: #fff !important;
-  text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: normal;
+  color: #fff !important; /* White site title, .site-title */
+  text-decoration: none; /* No underline, .site-title */
+  font-size: 1.1rem; /* Standard font, .site-title */
+  font-weight: normal; /* Normal weight, .site-title */
 }
 .site-title:hover {
-  color: #e0b3ff;
+  color: #e0b3ff; /* Light purple hover, .site-title */
 }
 
 /*=====================================================
 Cart Page Styles
 =====================================================*/
 .cart-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-top: 24px;
+  display: flex; /* Flex layout for cart items, .cart-grid */
+  flex-direction: column; /* Stack cart items vertically, .cart-grid */
+  gap: 16px; /* Space between cart items, .cart-grid */
+  margin-top: 24px; /* Space above cart, .cart-grid */
 }
 
 .checkout-btn {
-  background: #7c3aed;
-  color: #fff;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 6px;
-  font-size: 1.1rem;
-  margin-top: 24px;
-  cursor: pointer;
-  transition: background 0.3s;
+  background: #7c3aed; /* Purple checkout button, .checkout-btn */
+  color: #fff; /* White text, .checkout-btn */
+  border: none; /* No border, .checkout-btn */
+  padding: 12px 24px; /* Space inside button, .checkout-btn */
+  border-radius: 6px; /* Rounded corners, .checkout-btn */
+  font-size: 1.1rem; /* Slightly larger font, .checkout-btn */
+  margin-top: 24px; /* Space above button, .checkout-btn */
+  cursor: pointer; /* Pointer cursor, .checkout-btn */
+  transition: background 0.3s; /* Smooth color change, .checkout-btn */
 }
 .checkout-btn:hover {
-  background: #6a1b9a;
+  background: #6a1b9a; /* Darker purple on hover, .checkout-btn */
 }
 
 /*=====================================================
 Payment Page Styles
 =====================================================*/
 .payment-methods {
-  margin-bottom: 16px;
+  margin-bottom: 16px; /* Space below payment methods, .payment-methods */
 }
 .payment-details {
-  margin-bottom: 16px;
+  margin-bottom: 16px; /* Space below payment details, .payment-details */
 }
 #payment-message {
-  margin-top: 16px;
-  font-weight: bold;
+  margin-top: 16px; /* Space above payment message, #payment-message */
+  font-weight: bold; /* Bold payment message, #payment-message */
 }

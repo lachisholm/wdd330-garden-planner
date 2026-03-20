@@ -21,7 +21,7 @@
     <!-- Section for shipping details -->
     <section class="feature-card">
       <!-- Section heading -->
-      <h2>Shipping</h2>
+      <h2 style="text-align:center;">Shipping</h2>
       <!-- Shipping form for user input -->
       <form id="shipping-form" class="shipping-form">
         <!-- Label for buyer name input -->
@@ -96,6 +96,13 @@
         <label for="zip">ZIP Code:</label>
         <!-- Input for ZIP code -->
         <input type="text" id="zip" name="zip" required>
+        <!-- Country dropdown -->
+        <label for="country">Country:</label>
+        <select id="country" name="country">
+          <option value="USA">USA</option>
+        </select>
+        <!-- Message for country restriction -->
+        <div id="country-message" style="display:none; color:#c0392b; font-weight:bold; margin-top:8px;"></div>
         <!-- Submit button for shipping form -->
         <button type="submit" class="checkout-btn">Submit Shipping</button>
       </form>
@@ -107,5 +114,21 @@
   <script type="module" src="js/inject-header-footer.js"></script>
   <!-- Script for shipping functionality -->
   <script type="module" src="js/shipping.js"></script>
+  <!-- Script to show country restriction message -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const countrySelect = document.getElementById('country');
+      const countryMsg = document.getElementById('country-message');
+      if (countrySelect) {
+        countrySelect.addEventListener('click', function() {
+          countryMsg.style.display = 'block';
+          countryMsg.textContent = 'We currently only ship to the USA. Sorry for the inconvenience.';
+          setTimeout(() => {
+            countryMsg.style.display = 'none';
+          }, 20000);
+        });
+      }
+    });
+  </script>
 </body>
 </html>

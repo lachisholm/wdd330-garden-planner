@@ -96,7 +96,12 @@ function renderPlants(plants) {
     const gardenBtn = document.createElement("button");
     gardenBtn.textContent = "Add to Garden";
     gardenBtn.addEventListener("click", () => {
-      addToGarden(plant);
+      try {
+        addToGarden(plant);
+      } catch (error) {
+        alert("Could not add to garden. Please try again.");
+        console.error("Add to garden error:", error);
+      }
     });
     card.appendChild(gardenBtn);
     // Add to Cart button (for flowers, vegetables, and landscaping pages)
@@ -104,16 +109,21 @@ function renderPlants(plants) {
       const cartBtn = document.createElement("button");
       cartBtn.textContent = "Add to Cart";
       cartBtn.addEventListener("click", () => {
-        // Save to cart (gardenPlan localStorage)
-        let cart = getGardenPlan();
-        const plantId = plant.id || plant.species_id || plant.name || plant.common_name;
-        const exists = cart.find(item => (item.id || item.species_id || item.name || item.common_name) === plantId);
-        if (!exists) {
-          cart.push(plant);
-          saveGardenPlan(cart);
+        try {
+          // Save to cart (gardenPlan localStorage)
+          let cart = getGardenPlan();
+          const plantId = plant.id || plant.species_id || plant.name || plant.common_name;
+          const exists = cart.find(item => (item.id || item.species_id || item.name || item.common_name) === plantId);
+          if (!exists) {
+            cart.push(plant);
+            saveGardenPlan(cart);
+          }
+          // Redirect to cart page
+          window.location.href = "cart.html";
+        } catch (error) {
+          alert("Could not add to cart. Please check your browser settings.");
+          console.error("Add to cart error:", error);
         }
-        // Redirect to cart page
-        window.location.href = "cart.html";
       });
       card.appendChild(cartBtn);
     }
@@ -124,30 +134,41 @@ function renderPlants(plants) {
 
 // Add plant to garden plan
 function addToGarden(plant) {
-  // Get current garden plan
-  const plan = getGardenPlan();
-  // Use id, species_id, or fallback to name as unique key
-  const plantId = plant.id || plant.species_id || plant.name || plant.common_name;
-  // Check if plant already exists in plan
-  const exists = plan.find(item => (item.id || item.species_id || item.name || item.common_name) === plantId);
-  // Add plant if not already in plan
-  if (!exists) {
-    plan.push(plant);
-    saveGardenPlan(plan);
-    renderGardenPlan();
+  try {
+    // Get current garden plan
+    const plan = getGardenPlan();
+    // Use id, species_id, or fallback to name as unique key
+    const plantId = plant.id || plant.species_id || plant.name || plant.common_name;
+    // Check if plant already exists in plan
+    const exists = plan.find(item => (item.id || item.species_id || item.name || item.common_name) === plantId);
+    // Add plant if not already in plan
+    if (!exists) {
+      plan.push(plant);
+      saveGardenPlan(plan);
+      renderGardenPlan();
+    }
+  } catch (error) {
+    // Show user-friendly error message
+    alert("Sorry, we couldn't save your garden plan. Please check your browser settings.");
+    console.error("Garden plan save error:", error);
   }
 }
 
 // Remove plant from garden plan
 function removeFromGarden(id) {
-  // Get current garden plan
-  let plan = getGardenPlan();
-  // Filter out plant by unique id
-  plan = plan.filter(plant => (plant.id || plant.species_id || plant.name || plant.common_name) !== id);
-  // Save updated plan
-  saveGardenPlan(plan);
-  // Re-render garden plan
-  renderGardenPlan();
+  try {
+    // Get current garden plan
+    let plan = getGardenPlan();
+    // Filter out plant by unique id
+    plan = plan.filter(plant => (plant.id || plant.species_id || plant.name || plant.common_name) !== id);
+    // Save updated plan
+    saveGardenPlan(plan);
+    // Re-render garden plan
+    renderGardenPlan();
+  } catch (error) {
+    alert("Sorry, we couldn't update your garden plan. Please check your browser settings.");
+    console.error("Garden plan remove error:", error);
+  }
 }
 
 // Render saved garden plan

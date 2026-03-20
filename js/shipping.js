@@ -22,15 +22,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("shipping-form");
   // Get shipping message display element
   const shippingMessage = document.getElementById("shipping-message");
-  // Function to save shipping info to localStorage with error handling
+  // Function to save shipping info to localStorage with error handling, using FormData
   function saveShippingInfo() {
+    const formData = new FormData(form);
+    // Build shippingInfo object from FormData
     const shippingInfo = {
-      name: form["buyer-name"].value.trim(),
-      address: form.address.value.trim(),
-      city: form.city.value.trim(),
-      state: form.state.value,
-      zip: form.zip.value.trim(),
-      country: form.country.value
+      name: (formData.get("buyer-name") || "").trim(),
+      address: (formData.get("address") || "").trim(),
+      city: (formData.get("city") || "").trim(),
+      state: formData.get("state") || "",
+      zip: (formData.get("zip") || "").trim(),
+      country: formData.get("country") || ""
     };
     try {
       localStorage.setItem("shippingInfo", JSON.stringify(shippingInfo));
@@ -48,10 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", (e) => {
     // Prevent default form submission
     e.preventDefault();
-    // Get address, city, zip values
-    const address = form.address.value.trim();
-    const city = form.city.value.trim();
-    const zip = form.zip.value.trim();
+    // Use FormData for validation
+    const formData = new FormData(form);
+    const address = (formData.get("address") || "").trim();
+    const city = (formData.get("city") || "").trim();
+    const zip = (formData.get("zip") || "").trim();
     // Validate shipping fields
     if (!address || !city || !zip) {
       // Show error message if fields are missing

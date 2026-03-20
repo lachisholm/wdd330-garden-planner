@@ -35,39 +35,55 @@
     let currentPairIndex = Math.floor(Math.random() * cityPairs.length);
     let mapInstance = null;
 
-    // Update tracking info and map
+    // Update tracking info and map with error handling
     function updateTracking() {
       const pair = cityPairs[currentPairIndex];
       document.getElementById('track-info').textContent = `Your package is currently between ${pair.from} and ${pair.to}.`;
       // If Google Maps already loaded, update map
-      if (window.google && window.google.maps) {
-        initMap(pair);
+      try {
+        if (window.google && window.google.maps) {
+          initMap(pair);
+        }
+      } catch (error) {
+        document.getElementById('map').innerHTML = `<div style='color:#b71c1c; background:#fff3f3; border:1px solid #b71c1c; padding:16px; border-radius:8px; margin:24px auto; max-width:500px;'>
+          <strong>Sorry, the map could not be loaded.</strong><br>
+          Please check your internet connection or try again later.
+        </div>`;
+        console.error("Google Maps error:", error);
       }
     }
 
-    // Google Maps API setup
+    // Google Maps API setup with error handling
     function initMap(pair) {
-      // Remove old map if present
-      document.getElementById('map').innerHTML = "";
-      // Create new map
-      mapInstance = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: (pair.fromLat + pair.toLat) / 2, lng: (pair.fromLng + pair.toLng) / 2 },
-        zoom: 5
-      });
-      // Markers for cities
-      new google.maps.Marker({ position: { lat: pair.fromLat, lng: pair.fromLng }, map: mapInstance, label: 'A', title: pair.from });
-      new google.maps.Marker({ position: { lat: pair.toLat, lng: pair.toLng }, map: mapInstance, label: 'B', title: pair.to });
-      // Draw line between cities
-      const route = new google.maps.Polyline({
-        path: [ { lat: pair.fromLat, lng: pair.fromLng }, { lat: pair.toLat, lng: pair.toLng } ],
-        geodesic: true,
-        strokeColor: '#7c3aed',
-        strokeOpacity: 0.8,
-        strokeWeight: 4
-      });
-      route.setMap(mapInstance);
-      // Optionally, show a midpoint marker
-      new google.maps.Marker({ position: { lat: (pair.fromLat + pair.toLat) / 2, lng: (pair.fromLng + pair.toLng) / 2 }, map: mapInstance, label: '?', title: 'In transit', icon: { path: google.maps.SymbolPath.CIRCLE, scale: 8, fillColor: '#b39ddb', fillOpacity: 1, strokeWeight: 2, strokeColor: '#6a1b9a' } });
+      try {
+        // Remove old map if present
+        document.getElementById('map').innerHTML = "";
+        // Create new map
+        mapInstance = new google.maps.Map(document.getElementById('map'), {
+          center: { lat: (pair.fromLat + pair.toLat) / 2, lng: (pair.fromLng + pair.toLng) / 2 },
+          zoom: 5
+        });
+        // Markers for cities
+        new google.maps.Marker({ position: { lat: pair.fromLat, lng: pair.fromLng }, map: mapInstance, label: 'A', title: pair.from });
+        new google.maps.Marker({ position: { lat: pair.toLat, lng: pair.toLng }, map: mapInstance, label: 'B', title: pair.to });
+        // Draw line between cities
+        const route = new google.maps.Polyline({
+          path: [ { lat: pair.fromLat, lng: pair.fromLng }, { lat: pair.toLat, lng: pair.toLng } ],
+          geodesic: true,
+          strokeColor: '#7c3aed',
+          strokeOpacity: 0.8,
+          strokeWeight: 4
+        });
+        route.setMap(mapInstance);
+        // Optionally, show a midpoint marker
+        new google.maps.Marker({ position: { lat: (pair.fromLat + pair.toLat) / 2, lng: (pair.fromLng + pair.toLng) / 2 }, map: mapInstance, label: '?', title: 'In transit', icon: { path: google.maps.SymbolPath.CIRCLE, scale: 8, fillColor: '#b39ddb', fillOpacity: 1, strokeWeight: 2, strokeColor: '#6a1b9a' } });
+      } catch (error) {
+        document.getElementById('map').innerHTML = `<div style='color:#b71c1c; background:#fff3f3; border:1px solid #b71c1c; padding:16px; border-radius:8px; margin:24px auto; max-width:500px;'>
+          <strong>Sorry, the map could not be loaded.</strong><br>
+          Please check your internet connection or try again later.
+        </div>`;
+        console.error("Google Maps render error:", error);
+      }
     }
 
     // Initial update
@@ -85,6 +101,16 @@
     }, 10000);
   </script>
   <!-- Google Maps API (replace YOUR_API_KEY here)-->
+  <script>
+    // Show error if Google Maps fails to load
+    window.gm_authFailure = function() {
+      document.getElementById('map').innerHTML = `<div style='color:#b71c1c; background:#fff3f3; border:1px solid #b71c1c; padding:16px; border-radius:8px; margin:24px auto; max-width:500px;'>
+        <strong>Google Maps authentication failed.</strong><br>
+        Please check your API key or try again later.
+      </div>`;
+      console.error("Google Maps authentication failed.");
+    };
+  </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
 </body>
 </html>

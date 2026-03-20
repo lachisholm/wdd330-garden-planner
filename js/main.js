@@ -65,6 +65,14 @@ async function fetchPlants() {
   } catch (error) {
     // Log API error
     console.error("Plant API error:", error);
+    // Show user-friendly error message in plant container
+    const container = document.getElementById("plant-container");
+    if (container) {
+      container.innerHTML = `<div style='color:#b71c1c; background:#fff3f3; border:1px solid #b71c1c; padding:16px; border-radius:8px; margin:24px auto; max-width:500px;'>
+        <strong>Sorry, we couldn't load the plant data at this time.</strong><br>
+        Please check your internet connection or try again later.
+      </div>`;
+    }
     // Return empty array on error
     return [];
   }

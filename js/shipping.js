@@ -2,6 +2,14 @@
 // Handles shipping form submission and validation
 
 document.addEventListener("DOMContentLoaded", () => {
+      // Add clear (X) button functionality for each text input
+      document.querySelectorAll('.clear-input-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const targetId = btn.getAttribute('data-target');
+          const input = document.getElementById(targetId);
+          if (input) input.value = '';
+        });
+      });
     // Add event listener for Clear Form button
     const clearBtn = document.getElementById("clear-shipping-form");
     if (clearBtn) {

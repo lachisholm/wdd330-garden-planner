@@ -24,18 +24,15 @@
       <h2 style="text-align:center;">Shipping</h2>
       <!-- Shipping form for user input -->
       <form id="shipping-form" class="shipping-form">
-        <!-- Label for buyer name input -->
+        <!-- Label and input for buyer name with clear button -->
         <label for="buyer-name">Name:</label>
-        <!-- Input for buyer name -->
-        <input type="text" id="buyer-name" name="buyer-name" required>
-        <!-- Label for address input -->
+        <div class="input-clear-wrap"><input type="text" id="buyer-name" name="buyer-name" required><button type="button" class="clear-input-btn" data-target="buyer-name" title="Clear">×</button></div>
+        <!-- Label and input for address with clear button -->
         <label for="address">Address:</label>
-        <!-- Input for address -->
-        <input type="text" id="address" name="address" required>
-        <!-- Label for city input -->
+        <div class="input-clear-wrap"><input type="text" id="address" name="address" required><button type="button" class="clear-input-btn" data-target="address" title="Clear">×</button></div>
+        <!-- Label and input for city with clear button -->
         <label for="city">City:</label>
-        <!-- Input for city -->
-        <input type="text" id="city" name="city" required>
+        <div class="input-clear-wrap"><input type="text" id="city" name="city" required><button type="button" class="clear-input-btn" data-target="city" title="Clear">×</button></div>
         <!-- Label for state input -->
         <label for="state">State:</label>
         <!-- Dropdown for state selection -->
@@ -92,10 +89,36 @@
           <option value="WI">Wisconsin</option>
           <option value="WY">Wyoming</option>
         </select>
-        <!-- Label for ZIP code input -->
+        <!-- Label and input for ZIP code with clear button -->
         <label for="zip">ZIP Code:</label>
-        <!-- Input for ZIP code -->
-        <input type="text" id="zip" name="zip" required>
+        <div class="input-clear-wrap"><input type="text" id="zip" name="zip" required><button type="button" class="clear-input-btn" data-target="zip" title="Clear">×</button></div>
+          <style>
+            .input-clear-wrap {
+              display: flex;
+              align-items: center;
+              gap: 4px;
+              margin-bottom: 8px;
+            }
+            .clear-input-btn {
+              background: #e0e0e0;
+              border: none;
+              color: #6a1b9a;
+              font-size: 1.2em;
+              cursor: pointer;
+              border-radius: 50%;
+              width: 28px;
+              height: 28px;
+              line-height: 1;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              transition: background 0.2s;
+            }
+            .clear-input-btn:hover {
+              background: #b39ddb;
+              color: #fff;
+            }
+          </style>
         <!-- Country dropdown -->
         <label for="country">Country:</label>
         <select id="country" name="country">

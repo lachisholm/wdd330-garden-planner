@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("shipping-form");
   // Get shipping message display element
   const shippingMessage = document.getElementById("shipping-message");
-  // Function to save shipping info to localStorage
+  // Function to save shipping info to localStorage with error handling
   function saveShippingInfo() {
     const shippingInfo = {
       name: form["buyer-name"].value.trim(),
@@ -16,7 +16,16 @@ document.addEventListener("DOMContentLoaded", () => {
       zip: form.zip.value.trim(),
       country: form.country.value
     };
-    localStorage.setItem("shippingInfo", JSON.stringify(shippingInfo));
+    try {
+      localStorage.setItem("shippingInfo", JSON.stringify(shippingInfo));
+      return true;
+    } catch (error) {
+      // Show user-friendly error message
+      shippingMessage.textContent = "Sorry, we couldn't save your shipping info. Please check your browser settings.";
+      shippingMessage.style.color = "#c0392b";
+      console.error("Shipping info save error:", error);
+      return false;
+    }
   }
 
   // Handle shipping form submission
@@ -35,13 +44,15 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
     // Save shipping info to localStorage
-    saveShippingInfo();
-    // Show success message for shipping
-    shippingMessage.textContent = "Shipping details saved! Your order is on its way.";
-    shippingMessage.style.color = "#27ae60";
-    // Auto-hide the message after 10 seconds
-    setTimeout(() => {
-      shippingMessage.textContent = "";
-    }, 10000);
+    const saved = saveShippingInfo();
+    if (saved) {
+      // Show success message for shipping
+      shippingMessage.textContent = "Shipping details saved! Your order is on its way.";
+      shippingMessage.style.color = "#27ae60";
+      // Auto-hide the message after 10 seconds
+      setTimeout(() => {
+        shippingMessage.textContent = "";
+      }, 10000);
+    }
   });
 });

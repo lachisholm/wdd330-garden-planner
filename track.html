@@ -16,32 +16,46 @@
 <!-- Body section starts -->
 <body>
   <!-- Header and nav injected by inject-header-footer.js -->
-  <!-- Main content area -->
   <main>
-    <!-- Section for order tracking -->
-    <section class="feature-card">
-      <!-- Section heading -->
-      <h2>Track Your Order</h2>
-      <!-- Order tracking form -->
-      <form id="track-form" class="track-form">
-        <!-- Label for order number input -->
-        <label for="orderNumber">Order Number:</label>
-        <!-- Input for order number -->
-        <input type="text" id="orderNumber" name="orderNumber" required>
-        <!-- Submit button for tracking -->
-        <button type="submit" class="checkout-btn">Track Order</button>
-      </form>
-      <!-- Message area for tracking status -->
-      <div id="track-message" class="message"></div>
-      <!-- Link to confirmation page -->
-      <div style="padding-top: 32px;">
-        <a href="confirmation.html" class="checkout-btn">Back to Confirmation</a>
-      </div>
-    </section>
+    <h2 style="text-align:center;">Track Your Order</h2>
+    <div id="map" style="height: 400px; width: 100%; max-width: 800px; margin: 32px auto; border-radius: 12px; border: 2px solid #b39ddb;"></div>
+    <div class="track-info" id="track-info" style="text-align: center; margin-top: 24px; font-size: 1.2rem; color: #6a1b9a;"></div>
   </main>
-  <!-- Script for header/footer injection -->
-  <script type="module" src="js/inject-header-footer.js"></script>
-  <!-- Script for tracking functionality -->
-  <script type="module" src="js/track.js"></script>
+  <script>
+    // Example city pairs for demo
+    const cityPairs = [
+      { from: "Chicago, IL", to: "Denver, CO", fromLat: 41.8781, fromLng: -87.6298, toLat: 39.7392, toLng: -104.9903 },
+      { from: "Dallas, TX", to: "Phoenix, AZ", fromLat: 32.7767, fromLng: -96.7970, toLat: 33.4484, toLng: -112.0740 },
+      { from: "Atlanta, GA", to: "Miami, FL", fromLat: 33.7490, fromLng: -84.3880, toLat: 25.7617, toLng: -80.1918 },
+      { from: "Seattle, WA", to: "San Francisco, CA", fromLat: 47.6062, fromLng: -122.3321, toLat: 37.7749, toLng: -122.4194 },
+      { from: "New York, NY", to: "Boston, MA", fromLat: 40.7128, fromLng: -74.0060, toLat: 42.3601, toLng: -71.0589 }
+    ];
+    // Randomly pick a pair
+    const pair = cityPairs[Math.floor(Math.random() * cityPairs.length)];
+    document.getElementById('track-info').textContent = `Your package is currently between ${pair.from} and ${pair.to}.`;
+    // Google Maps API setup
+    function initMap() {
+      const map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: (pair.fromLat + pair.toLat) / 2, lng: (pair.fromLng + pair.toLng) / 2 },
+        zoom: 5
+      });
+      // Markers for cities
+      new google.maps.Marker({ position: { lat: pair.fromLat, lng: pair.fromLng }, map, label: 'A', title: pair.from });
+      new google.maps.Marker({ position: { lat: pair.toLat, lng: pair.toLng }, map, label: 'B', title: pair.to });
+      // Draw line between cities
+      const route = new google.maps.Polyline({
+        path: [ { lat: pair.fromLat, lng: pair.fromLng }, { lat: pair.toLat, lng: pair.toLng } ],
+        geodesic: true,
+        strokeColor: '#7c3aed',
+        strokeOpacity: 0.8,
+        strokeWeight: 4
+      });
+      route.setMap(map);
+      // Optionally, show a midpoint marker
+      new google.maps.Marker({ position: { lat: (pair.fromLat + pair.toLat) / 2, lng: (pair.fromLng + pair.toLng) / 2 }, map, label: '?', title: 'In transit', icon: { path: google.maps.SymbolPath.CIRCLE, scale: 8, fillColor: '#b39ddb', fillOpacity: 1, strokeWeight: 2, strokeColor: '#6a1b9a' } });
+    }
+  </script>
+  <!-- Google Maps API (replace YOUR_API_KEY with your actual key) -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
 </body>
 </html>

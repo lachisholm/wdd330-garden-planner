@@ -39,5 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Show success message for shipping
     shippingMessage.textContent = "Shipping details saved! Your order is on its way.";
     shippingMessage.style.color = "#27ae60";
+    // Auto-hide the message after 10 seconds
+    setTimeout(() => {
+      shippingMessage.textContent = "";
+    }, 10000);
   });
 });

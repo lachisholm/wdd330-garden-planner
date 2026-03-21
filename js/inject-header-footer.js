@@ -13,7 +13,8 @@ function injectHeaderFooter() {
       // Only inject carousel on home page, and ensure it is the very first element
       let insertBeforeNode = document.body.firstChild;
       let injectedCarousel = false;
-      if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '') {
+      const isHome = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '';
+      if (isHome) {
         const carousel = temp.querySelector('#home-carousel-container');
         if (carousel) {
           carousel.style.display = '';
@@ -25,6 +26,11 @@ function injectHeaderFooter() {
       // Insert header at top of body (after carousel if present)
       const header = temp.querySelector('.site-header');
       if (header) {
+        // Remove Sign In link if not home page
+        if (!isHome) {
+          const signIn = header.querySelector('#sign-in-link');
+          if (signIn) signIn.remove();
+        }
         document.body.insertBefore(header, insertBeforeNode);
       }
       // Insert footer at bottom of body if found

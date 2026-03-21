@@ -12,12 +12,14 @@ function injectHeaderFooter() {
 
       // Only inject carousel on home page, and ensure it is the very first element
       let insertBeforeNode = document.body.firstChild;
+      let injectedCarousel = false;
       if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '') {
         const carousel = temp.querySelector('#home-carousel-container');
         if (carousel) {
           carousel.style.display = '';
           document.body.insertBefore(carousel, insertBeforeNode);
           insertBeforeNode = carousel.nextSibling;
+          injectedCarousel = true;
         }
       }
       // Insert header at top of body (after carousel if present)
@@ -37,6 +39,10 @@ function injectHeaderFooter() {
         hamburger.addEventListener('click', () => {
           navLinks.classList.toggle('active');
         });
+      }
+      // Initialize carousel if injected (after DOM update)
+      if (injectedCarousel && typeof initHomeCarousel === 'function') {
+        initHomeCarousel();
       }
     });
 }

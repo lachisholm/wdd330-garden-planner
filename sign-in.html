@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - Garden Planner</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Header and footer will be injected -->
+  <main style="max-width:400px;margin:48px auto 0 auto;padding:32px 24px;background:#fff;border-radius:12px;box-shadow:0 2px 16px rgba(44,62,80,0.08);">
+    <h2 style="text-align:center;margin-bottom:24px;">Sign In</h2>
+    <form id="sign-in-form" style="display:flex;flex-direction:column;gap:16px;">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required autocomplete="username">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required autocomplete="current-password">
+      <button type="submit" style="background:#7c3aed;color:#fff;border:none;border-radius:6px;padding:12px 0;font-size:1.1rem;cursor:pointer;">Sign In</button>
+    </form>
+    <div id="sign-in-message" style="margin-top:18px;text-align:center;color:#c0392b;font-weight:bold;"></div>
+  </main>
+  <script>
+    document.getElementById('sign-in-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Placeholder: always fail (no backend)
+      document.getElementById('sign-in-message').textContent = 'Sign in functionality is not implemented.';
+    });
+  </script>
+  <script src="js/inject-header-footer.js"></script>
+</body>
+</html>
